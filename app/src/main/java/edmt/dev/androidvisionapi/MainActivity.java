@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     private CaptureRequest.Builder previewBuilder;
     private CameraCaptureSession previewSession;
     Button getpicture;
+
+    // constant values
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     String[] perms = {"android.permission.CAMERA"};
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -85,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+
     //END OF FOR CAMERA AND TEXTURE VIEW
+    private static int PHOTO_WIDTH = 600;
+    private static int PHOTO_HEIGHT = 462;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,8 +237,9 @@ public class MainActivity extends AppCompatActivity {
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
                         Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                        Bitmap resizedBitmap = resizeImage(bitmapImage);
                         if (isNetworkConnected()) {
-                            detectAndFrame(bitmapImage);
+                            detectAndFrame(resizedBitmap);
                         } else {
                             Toast.makeText(getApplicationContext(), "Please Connect to the Internet!", Toast.LENGTH_SHORT).show();
                         }
@@ -442,11 +448,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (cameraAccepted) {
                         //Snackbar.make(view, "Permission Granted, Now you can use the Camera.", Snackbar.LENGTH_LONG).show();
-                        Toast.makeText(getApplicationContext(),"Permission Granted, Now you can use the Camera.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Permission Granted, Now you can use the Camera.", Toast.LENGTH_SHORT).show();
                     } else {
 
                         // Snackbar.make(view, "Permission Denied, You cannot use camera.", Snackbar.LENGTH_LONG).show();
-                        Toast.makeText(getApplicationContext(),"Permission Denied, You cannot use camera.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Permission Denied, You cannot use camera.", Toast.LENGTH_SHORT).show();
                         showMessageOKCancel("You need to allow access to the permissions",
                                 new DialogInterface.OnClickListener() {
                                     @Override
@@ -488,5 +494,12 @@ public class MainActivity extends AppCompatActivity {
             return false;
         } else
             return true;
+    }
+
+    private Bitmap resizeImage(Bitmap original) {
+        Bitmap resized = Bitmap.createScaledBitmap(original, PHOTO_WIDTH, PHOTO_HEIGHT, true);
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        resized.compress(Bitmap.CompressFormat.JPEG, 100, blob);
+        return resized;
     }
 }
