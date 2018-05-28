@@ -163,26 +163,54 @@ public class MainActivity extends AppCompatActivity {
                 mDialog.dismiss();
                 try {
                     AnalysisResult result = new Gson().fromJson(s, AnalysisResult.class);
-                    TextView textView = (TextView) findViewById(R.id.txtDescription);
+                    TextView textView = (TextView) findViewById(R.id.txtTags);
+                    TextView textDescription = (TextView) findViewById(R.id.txtDescription);
                     StringBuilder stringBuilder = new StringBuilder();
+                    StringBuilder descriptionBuilder = new StringBuilder();
 
                     String[] ignoreArr = {"indoor", "open", "black", "dark", "light", "white"};
+                    String[] tagsForCrown = {"flower", "necklace", "gold"};
+                    String[] tagsForAntique = {"old", "dirty", "elephant"};
+                    Boolean isCrown = false;
+                    Boolean isAntique = false;
 
                     for (String tag : result.description.tags) {
                         if (!Arrays.asList(ignoreArr).contains(tag)) {
                             stringBuilder.append(tag + ", ");
                         }
+                        if(Arrays.asList(tagsForCrown).contains(tag)){
+                            isCrown = true;
+                        }
+                        if(Arrays.asList(tagsForAntique).contains(tag)){
+                            isAntique = true;
+                        }
                     }
                     for (Caption caption : result.description.captions) {
-                        stringBuilder.append("\n\n" + caption.text);
+                        if((!isCrown) && (!isAntique)) {
+                            descriptionBuilder.append(caption.text);
+                        } else{
+                            if((isAntique) && (!isCrown)){
+                                descriptionBuilder.append("An antique : A true antique is an item perceived as having value because of its aesthetic or historical significance and at least 100 years old");
+                            }
+                            if((isCrown) && (!isAntique)) {
+
+                                descriptionBuilder.append("A crown : A crown is a traditional symbolic form of headwear, worn by a monarch or by a deity, for whom the crown traditionally represents power, legitimacy and etc");
+                            }
+                            if((isCrown) && (isAntique)){
+                                descriptionBuilder.append("There's an antique or a Jewellery or Both in vicinity.");
+                            }
+                        }
                     }
-                    if (stringBuilder.toString().equals("")) {
-                        stringBuilder.append("No clear view!");
+                    if (descriptionBuilder.toString().equals("")) {
+                        descriptionBuilder.append("No clear combination to give a description");
                     }
+
+
 
                     Log.d("vv", stringBuilder.toString());
 
                     textView.setText(stringBuilder);
+                    textDescription.setText(descriptionBuilder);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Sorry!, Nothing to Show", Toast.LENGTH_SHORT).show();

@@ -3,147 +3,147 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.1.1_099fc01ee8b52921850d0ecd52541817b897cf76.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\design\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.1.1_8b23e09cc01c4e6728c524f037d738023cba08a6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.1_fae9334298237c90dd9a8a7a8c6c36f1c50156ef.jar" />
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.1.1_1d2731f8fa7e9484cccdfd89763eb355356b744e.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\Softwares\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
+        jar="/home/ashan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.1_93a13cc888fa6a6be1097f918bb0d1b28bbeae95.jar" />
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/support-annotations-25.1.1_17b72e764ac3c8bc2dc68435c1359edc19548371.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.1.1_0d9f00daf30afab237eeed325cef67863eb8887d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\vision\1.0.374\jars\libs\commons-io-2.4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\commons-io-2.4_3e9b522f32c6464f62f64496f44903b118df1bf7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.1_d466dc0e8f5b9dece1cf6c496bbed7d48200a107.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.1.1_3b92a38358ccb73847f94195f0be20196c1f1359.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\vision\1.0.374\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9106258dc9ec0ed3b24aea758c35a3839cad73d">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.microsoft.projectoxford-vision-1.0.374_9c88e75e46c66c9a6ab91438b1d7ee81ea30e882.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.1.1_5d73f98fec8554c87f3ebfd7d323302becd873a0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\gson-2.3.1_5f513ca871dcad56623783c97e2371c4ea78353c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.1_0c5535439e1f95629a0739dfe2895a1a6e1fd476.jar" />
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.1.1_a13fe063e426f3687799d62337430a06593618a7.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/vision/1.0.374/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.1_900d3125e3f131d766b5d43c6c7b46c6aca33748.jar" />
+        sha1="b9106258dc9ec0ed3b24aea758c35a3839cad73d">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-vision-1.0.374_a98a44760fd2e146867bbb9029c66ff7f65a24e4.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.1\jars\classes.jar"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.1_9f0340abbff976df0850c2fd0d1e13398c0f4101.jar" />
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.1.1_75363d52636cf9a05a3b990c6ea02312ff02b57c.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
+        jar="/home/ashan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/gson-2.3.1_7f7ee728b7994deea633bc555550da498f16910c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.1.1_887ce0611bee84457b4a5ee49682fcf7aa85ef81.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/vision/1.0.374/jars/libs/commons-io-2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/commons-io-2.4_9bd53de5d135cb26b01e2e75321f7cc6f24d1079.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.1.1_08f64890be3ff2801dad68ecb21f1a12f1d97604.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.1.1_a73fdfb1c516d054a80fc7e41d856c81f8640fc4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.1.1_57f42dcff7c9ee628415215938af6721cf2b2b3b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.1_619745902152e53a9ca7908454fe662283befc69.jar" />
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.1.1_479daff00f8890e6e611b0f4dd901ac598b06197.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.1.1_09742846795c0d5aefd93e81b313ed26f4210c61.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.1.1_458b07c4875ec99a2b1702668f521be98029becf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.1.1_ac3993db9cabf8cd2484de14bd15612617df5b35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ashan/Desktop/eZMuseum/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="C:\Users\Roshan\Documents\AndroidMicrosoftVisionAPI\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.1.1_a7005d88a031709ed9698ef1aec72d58590d2297.jar" />
+        <dex dex="/home/ashan/Desktop/eZMuseum/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.1.1_c43ca0f3b3977ecacce204345d1dd6ce06dca805.jar" />
     </item>
 
 </items>
