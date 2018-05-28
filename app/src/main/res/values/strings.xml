@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">AndroidVisionAPI</string>
+    <string name="app_name">eZMuseum</string>
     <string name="capture">Capture</string>
     <string name="process">Process</string>
-    <string name="description">Description...</string>
+    <string name="description">Tags and Description</string>
     <string name="getpicture">getPicture</string>
     <string name="reveal">REVEAL</string>
 </resources>

@@ -1,8 +1,11 @@
 package edmt.dev.androidvisionapi;
 
-import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraCaptureSession;
@@ -15,60 +18,50 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.Menu;
 import android.view.Surface;
 import android.view.TextureView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.LogRecord;
-
-
-import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.content.Intent;
-import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.vision.VisionServiceClient;
 import com.microsoft.projectoxford.vision.VisionServiceRestClient;
 import com.microsoft.projectoxford.vision.contract.AnalysisResult;
 import com.microsoft.projectoxford.vision.contract.Caption;
-import com.microsoft.projectoxford.vision.contract.Tag;
-import com.microsoft.projectoxford.vision.rest.VisionServiceException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import static android.Manifest.permission.CAMERA;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     private CameraCaptureSession previewSession;
     Button getpicture;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    String[] perms = {"android.permission.CAMERA"};
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -92,14 +87,22 @@ public class MainActivity extends AppCompatActivity {
     }
     //END OF FOR CAMERA AND TEXTURE VIEW
 
-
-    private ImageView imageHolder;
-    private final int requestCode = 20;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        if (checkPermission()) {
+            Toast.makeText(getApplicationContext(), "Permission Ok", Toast.LENGTH_SHORT).show();
+            //Snackbar.make(view, "Permission already granted.", Snackbar.LENGTH_LONG).show();
+
+        } else {
+            //Snackbar.make(view, "Please request permission.", Snackbar.LENGTH_LONG).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(perms, PERMISSION_REQUEST_CODE);
+            }
+        }
 
         //FOR TEXTURE VIEW
         textureView = (TextureView) findViewById(R.id.textureview);
@@ -112,22 +115,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //END OF FOR TEXTURE VIEW
-
-
     }
-
-
 
 
     // Detect faces by uploading face images
     // Frame faces after detection
     private void detectAndFrame(final Bitmap imageBitmap) {
-
-//        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-
-//        Button btnProcess = (Button) findViewById(R.id.btnProcess);
-
-//        imageView.setImageBitmap(imageBitmap);
 
         //Convert image to stream
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -135,64 +128,70 @@ public class MainActivity extends AppCompatActivity {
         final ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
 
-                final AsyncTask<InputStream, String, String> visionTask = new AsyncTask<InputStream, String, String>() {
-                    ProgressDialog mDialog = new ProgressDialog(MainActivity.this);
+        final AsyncTask<InputStream, String, String> visionTask = new AsyncTask<InputStream, String, String>() {
+            ProgressDialog mDialog = new ProgressDialog(MainActivity.this);
 
-                    @Override
-                    protected String doInBackground(InputStream... params) {
-                        try {
-                            publishProgress("Recognizing....");
-                            String[] features = {"Tags"};
-                            String[] details = {};
+            @Override
+            protected String doInBackground(InputStream... params) {
+                try {
+                    publishProgress("Recognizing....");
+                    String[] features = {"Description"};
+                    String[] details = {};
 
-                            AnalysisResult result = visionServiceClient.analyzeImage(params[0], features, details);
+                    AnalysisResult result = visionServiceClient.analyzeImage(params[0], features, details);
 
-                            String strResult = new Gson().toJson(result);
-                            return strResult;
+                    String strResult = new Gson().toJson(result);
+                    return strResult;
 
-                        } catch (Exception e) {
-                            return null;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPreExecute() {
+                mDialog.show();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                mDialog.dismiss();
+                try {
+                    AnalysisResult result = new Gson().fromJson(s, AnalysisResult.class);
+                    TextView textView = (TextView) findViewById(R.id.txtDescription);
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    String[] ignoreArr = {"indoor", "open", "black", "dark", "light", "white"};
+
+                    for (String tag : result.description.tags) {
+                        if (!Arrays.asList(ignoreArr).contains(tag)) {
+                            stringBuilder.append(tag + ", ");
                         }
                     }
-
-                    @Override
-                    protected void onPreExecute() {
-                        mDialog.show();
+                    for (Caption caption : result.description.captions) {
+                        stringBuilder.append("\n\n" + caption.text);
+                    }
+                    if (stringBuilder.toString().equals("")) {
+                        stringBuilder.append("No clear view!");
                     }
 
-                    @Override
-                    protected void onPostExecute(String s) {
-                        mDialog.dismiss();
+                    Log.d("vv", stringBuilder.toString());
 
-                        AnalysisResult result = new Gson().fromJson(s, AnalysisResult.class);
-                        TextView textView = (TextView) findViewById(R.id.txtDescription);
-                        StringBuilder stringBuilder = new StringBuilder();
+                    textView.setText(stringBuilder);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Sorry!, Nothing to Show", Toast.LENGTH_SHORT).show();
+                }
 
-                        String[] ignoreArr = {"indoor", "open"};
+            }
 
-                        for (Tag tag : result.tags) {
-                            if (!Arrays.asList(ignoreArr).contains(tag.name)) {
-                                stringBuilder.append(tag.name + ": " + tag.confidence + "\n");
-                            }
-                        }
-                        if (stringBuilder.toString().equals("")) {
-                            stringBuilder.append("No clear view!");
-                        }
+            @Override
+            protected void onProgressUpdate(String... values) {
+                mDialog.setMessage(values[0]);
+            }
+        };
 
-                        Log.d("vv", stringBuilder.toString());
-
-                        textView.setText(stringBuilder);
-
-                    }
-
-                    @Override
-                    protected void onProgressUpdate(String... values) {
-                        mDialog.setMessage(values[0]);
-                    }
-                };
-
-                visionTask.execute(inputStream);
-
+        visionTask.execute(inputStream);
 
 
     }
@@ -233,7 +232,12 @@ public class MainActivity extends AppCompatActivity {
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
                         Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-                        detectAndFrame(bitmapImage);
+                        if (isNetworkConnected()) {
+                            detectAndFrame(bitmapImage);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please Connect to the Internet!", Toast.LENGTH_SHORT).show();
+                        }
+
 //                        save(bytes);
                     } catch (Exception ee) {
                     } finally {
@@ -299,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(camerId);
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
             previewsize = map.getOutputSizes(SurfaceTexture.class)[0];
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -310,116 +314,105 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             manager.openCamera(camerId, stateCallback, null);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
         }
     }
-    private TextureView.SurfaceTextureListener surfaceTextureListener=new TextureView.SurfaceTextureListener() {
+
+    private TextureView.SurfaceTextureListener surfaceTextureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
             openCamera();
         }
+
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
         }
+
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
             return false;
         }
+
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         }
     };
-    private CameraDevice.StateCallback stateCallback=new CameraDevice.StateCallback() {
+    private CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(CameraDevice camera) {
-            cameraDevice=camera;
+            cameraDevice = camera;
             startCamera();
         }
+
         @Override
         public void onDisconnected(CameraDevice camera) {
         }
+
         @Override
         public void onError(CameraDevice camera, int error) {
         }
     };
+
     @Override
     protected void onPause() {
         super.onPause();
-        if(cameraDevice!=null)
-        {
+        if (cameraDevice != null) {
             cameraDevice.close();
         }
     }
-    void startCamera()
-    {
-        if(cameraDevice==null||!textureView.isAvailable()|| previewsize==null)
-        {
+
+    void startCamera() {
+        if (cameraDevice == null || !textureView.isAvailable() || previewsize == null) {
             return;
         }
-        SurfaceTexture texture=textureView.getSurfaceTexture();
-        if(texture==null)
-        {
+        SurfaceTexture texture = textureView.getSurfaceTexture();
+        if (texture == null) {
             return;
         }
-        texture.setDefaultBufferSize(previewsize.getWidth(),previewsize.getHeight());
-        Surface surface=new Surface(texture);
-        try
-        {
-            previewBuilder=cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-        }catch (Exception e)
-        {
+        texture.setDefaultBufferSize(previewsize.getWidth(), previewsize.getHeight());
+        Surface surface = new Surface(texture);
+        try {
+            previewBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+        } catch (Exception e) {
         }
         previewBuilder.addTarget(surface);
-        try
-        {
+        try {
             cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback() {
                 @Override
                 public void onConfigured(CameraCaptureSession session) {
-                    previewSession=session;
+                    previewSession = session;
                     getChangedPreview();
                 }
+
                 @Override
                 public void onConfigureFailed(CameraCaptureSession session) {
                 }
-            },null);
-        }catch (Exception e)
-        {
+            }, null);
+        } catch (Exception e) {
         }
     }
-    void getChangedPreview()
-    {
-        if(cameraDevice==null)
-        {
+
+    void getChangedPreview() {
+        if (cameraDevice == null) {
             return;
         }
         previewBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-        HandlerThread thread=new HandlerThread("changed Preview");
+        HandlerThread thread = new HandlerThread("changed Preview");
         thread.start();
-        Handler handler=new Handler(thread.getLooper());
-        try
-        {
+        Handler handler = new Handler(thread.getLooper());
+        try {
             previewSession.setRepeatingRequest(previewBuilder.build(), null, handler);
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
     private static File getOutputMediaFile() {
         File mediaStorageDir = new File(
                 Environment
@@ -438,5 +431,62 @@ public class MainActivity extends AppCompatActivity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator
                 + "IMG_" + timeStamp + ".jpg");
         return mediaFile;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                    if (cameraAccepted) {
+                        //Snackbar.make(view, "Permission Granted, Now you can use the Camera.", Snackbar.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Permission Granted, Now you can use the Camera.",Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        // Snackbar.make(view, "Permission Denied, You cannot use camera.", Snackbar.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Permission Denied, You cannot use camera.",Toast.LENGTH_SHORT).show();
+                        showMessageOKCancel("You need to allow access to the permissions",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                            requestPermissions(new String[]{CAMERA},
+                                                    PERMISSION_REQUEST_CODE);
+                                        }
+                                    }
+                                });
+                        return;
+                    }
+                }
+        }
+
+    }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
+
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    private boolean isNetworkConnected() {
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo == null) {
+            // There are no active networks.
+            return false;
+        } else
+            return true;
     }
 }
